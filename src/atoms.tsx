@@ -11,3 +11,4 @@ export const isGeneratingAtom = atom(false);
 export const canvasRefAtom = atom<{ current: HTMLCanvasElement | null }>({
   current: null,
 });
+export const visibleTextPromptAtom = atomWithStorage("visible-prompt", true);

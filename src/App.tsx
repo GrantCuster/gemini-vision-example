@@ -3,6 +3,7 @@ import {
   isGeneratingAtom,
   responseAtom,
   promptAtom,
+  visibleTextPromptAtom,
 } from "./atoms";
 import { useAtom } from "jotai";
 import Markdown from "react-markdown";
@@ -15,6 +16,9 @@ function App() {
   const [response, setResponse] = useAtom(responseAtom);
   const [isGenerating, setIsGenerating] = useAtom(isGeneratingAtom);
   const [canvasRefA] = useAtom(canvasRefAtom);
+  const [visibleTextPrompt, setVisibleTextPrompt] = useAtom(
+    visibleTextPromptAtom
+  );
   useHandleDragAndDropImage();
 
   return (
@@ -30,15 +34,30 @@ function App() {
             Gemini API
           </a>
         </div>
-        <textarea
-          className="border resize-y border-black w-full px-2 py-1"
-          rows={1}
-          value={prompt}
-          placeholder="prompt"
-          onChange={(e) => {
-            setPrompt(e.currentTarget.value);
-          }}
-        />
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center justify-between">
+            <div className="text-sm">Prompt</div>
+            <button
+              className="text-sm underline"
+              onClick={() => {
+                setVisibleTextPrompt(!visibleTextPrompt);
+              }}
+            >
+              {visibleTextPrompt ? "hide" : "show"}
+            </button>
+          </div>
+          {visibleTextPrompt ? (
+            <textarea
+              className="border resize-y border-black w-full px-2 py-1"
+              rows={1}
+              value={prompt}
+              placeholder="prompt"
+              onChange={(e) => {
+                setPrompt(e.currentTarget.value);
+              }}
+            />
+          ) : null}
+        </div>
         <Canvas />
         <div>
           {isGenerating ? (
