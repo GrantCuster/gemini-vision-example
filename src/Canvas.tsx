@@ -71,8 +71,12 @@ export function Canvas() {
   }
 
   useEffect(() => {
-    // load from localStorage
     const prevCanvas = localStorage.getItem("canvas");
+    const c = canvasRef.current!;
+    const ctx = c.getContext("2d")!;
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, c.width, c.height);
+    // load from localStorage
     if (prevCanvas) {
       drawImageToCanvas(prevCanvas);
     }
@@ -104,7 +108,8 @@ export function Canvas() {
                 onClick={() => {
                   const c = canvasRef.current!;
                   const ctx = c.getContext("2d")!;
-                  ctx.clearRect(0, 0, w, h);
+                  ctx.fillStyle = "white";
+                  ctx.fillRect(0, 0, c.width, c.height);
                   pointsRef.current = [];
                   saveCanvasToLocalStorage();
                 }}
