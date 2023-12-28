@@ -1,4 +1,4 @@
 runtime: nodejs20
-service: gemini-text-generation
+service: gemini-vision-example
 
 default_expiration: "0s"
