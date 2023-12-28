@@ -91,7 +91,7 @@ function App() {
         </div>
         {response.length > 0 ? (
           <div>
-            <Markdown className="w-full pb-4 mx-auto prose">
+            <Markdown className="w-full pb-4 mx-auto prose text-black">
               {response}
             </Markdown>
           </div>
