@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="flex h-[100dvh] overflow-auto flex-col">
-      <div className="max-w-[530px] mx-auto flex pt-3 pb-5 px-2 flex-col gap-3">
+      <div className="max-w-[530px] mx-auto flex pt-4 px-2 flex-col gap-3">
         <div className="">
           <span className="font-bold">Gemini Vision Example</span> using the{" "}
           <a
@@ -61,12 +61,12 @@ function App() {
         <Canvas />
         <div>
           {isGenerating ? (
-            <div className="bg-black animate-pulse text-center w-full py-2 rounded-2xl text-white">
+            <div className="border border-black animate-pulse text-center w-full py-1 rounded-full bg-neutral-200">
               Generating...
             </div>
           ) : (
             <button
-              className="bg-black text-center w-full py-2 rounded-2xl text-white"
+              className="border border-black text-center w-full py-1 rounded-full hover:bg-neutral-100"
               onClick={async () => {
                 setResponse("");
                 setIsGenerating(true);
