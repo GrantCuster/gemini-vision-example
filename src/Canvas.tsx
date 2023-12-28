@@ -80,59 +80,58 @@ export function Canvas() {
     if (prevCanvas) {
       drawImageToCanvas(prevCanvas);
     }
-  }, [drawImageToCanvas]);
+    // intentionally leaving out dependency
+  }, []);
 
   useEffect(() => {
     canvasRefA.current = canvasRef.current;
   }, [canvasRefA]);
 
   return (
-    <div className="">
-      <div className="bg-white border border-black">
-        <canvas
-          className="block cursor-crosshair touch-none"
-          ref={canvasRef}
-          width={w}
-          height={h}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-        />
-        <div className="flex border-t border-black justify-between">
-          <div className="flex">
-            <div className="flex gap-1 items-center border-r border-black">
-              <ImageUploader />
-            </div>
-            <div className="flex gap-1 items-center border-r border-black">
-              <button
-                className="text-sm flex gap-1 items-center px-2 py-2 hover:bg-neutral-100"
-                onClick={() => {
-                  const c = canvasRef.current!;
-                  const ctx = c.getContext("2d")!;
-                  ctx.fillStyle = "white";
-                  ctx.fillRect(0, 0, c.width, c.height);
-                  pointsRef.current = [];
-                  saveCanvasToLocalStorage();
-                }}
-              >
-                <XIcon size={14} /> Clear Canvas
-              </button>
-            </div>
+    <div className="bg-white border border-black">
+      <canvas
+        className="block cursor-crosshair touch-none"
+        ref={canvasRef}
+        width={w}
+        height={h}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+      />
+      <div className="flex border-t border-black justify-between">
+        <div className="flex">
+          <div className="flex gap-1 items-center border-r border-black">
+            <ImageUploader />
           </div>
-          <div className="flex">
-            <div className="flex gap-1 items-center px-2 py-1 border-l border-black">
-              <label className="text-sm cursor-pointer" htmlFor="color">
-                Ink color:
-              </label>
-              <input
-                className="cursor-pointer"
-                id="color"
-                type="color"
-                value={inkColor}
-                onChange={(e) => {
-                  setInkColor(e.currentTarget.value);
-                }}
-              />
-            </div>
+          <div className="flex gap-1 items-center border-r border-black">
+            <button
+              className="text-sm flex gap-1 items-center px-2 py-2 hover:bg-neutral-100"
+              onClick={() => {
+                const c = canvasRef.current!;
+                const ctx = c.getContext("2d")!;
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, 0, c.width, c.height);
+                pointsRef.current = [];
+                saveCanvasToLocalStorage();
+              }}
+            >
+              <XIcon size={14} /> Clear Canvas
+            </button>
+          </div>
+        </div>
+        <div className="flex">
+          <div className="flex gap-1 items-center px-2 py-1 border-l border-black">
+            <label className="text-sm cursor-pointer" htmlFor="color">
+              Ink color:
+            </label>
+            <input
+              className="cursor-pointer"
+              id="color"
+              type="color"
+              value={inkColor}
+              onChange={(e) => {
+                setInkColor(e.currentTarget.value);
+              }}
+            />
           </div>
         </div>
       </div>
